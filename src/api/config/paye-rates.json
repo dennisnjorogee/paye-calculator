@@ -1,0 +1,10 @@
+{
+    "personal-tax-relief": 2400.00,
+    "tax-brackets": [
+        {"limit": 24000, "rate": 0.1},
+        {"limit": 8333, "rate": 0.25},
+        {"limit": 467667, "rate": 0.3},
+        {"limit": 300000, "rate": 0.325},
+        {"limit": null, "rate": 0.35}
+    ]
+}

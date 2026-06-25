@@ -1,0 +1,8 @@
+{
+    "nssf-rate": 0.06,
+    "nssf-lower-earnings-limit": 9000,
+    "nssf-upper-earnings-limit": 108000,
+    "nssf-max-tier-1-contribution": 540,
+    "nssf-max-tier-2-contribution": 5940,
+    "nssf-max-total-contribution-per-side": 6840
+}
