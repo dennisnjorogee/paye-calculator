@@ -1,33 +1,14 @@
 import apiService from "../services/api.service.js";
-import AppError from "../utils/error.js";
 
-const netPay = (req, res, next) => {
-  try {
-    const grossPay = req.grossPay;
-    console.log(grossPay);
+const calculateNetPay = (req, res) => {
+  const grossPay = req.grossPay;
 
-    res.status(200).json({
-      status: "success",
-    });
-  } catch (error) {
-    next(error);
-  }
+  const netPay = apiService.calculateNetPay(grossPay);
+
+  res.status(200).json({
+    status: "success",
+    payload: netPay,
+  });
 };
 
-const calculateGrossPay = (req, res, next) => {
-  try {
-    console.log(req.body);
-
-    res.status(200).json({
-      status: "success",
-    });
-  } catch (error) {}
-};
-
-const calculateHousingLevy = (req, res, next) => {
-  try {
-    apiService.calculateHousingLevy(grossPay);
-  } catch (error) {}
-};
-
-export default { netPay, calculateGrossPay, calculateHousingLevy };
+export default { calculateNetPay };
