@@ -89,8 +89,6 @@ Access individual calculators via the web UI:
 
 Calculate net pay for multiple employees in a single request.
 
-**Request Body:**
-
 Include a service code for every request
 
 ##### Valid Service Codes
@@ -106,6 +104,8 @@ Include a service code for every request
 
 **NET PAY**
 -serviceCode: "NETPAY"
+
+**Request Body:**
 
 ```json
 {
