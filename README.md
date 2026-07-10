@@ -75,7 +75,7 @@ The application will be available at `http://localhost:3000`
 Access individual calculators via the web UI:
 
 - **Home** - `http://localhost:3000/`
-- **Gross Pay Calculator** - `http://localhost:3000/gross-pay-calculator`
+- **Gross Pay Calculator** - `http://localhost:3000/net-pay-calculator`
 - **NSSF Calculator** - `http://localhost:3000/nssf-calculator`
 - **SHIF Calculator** - `http://localhost:3000/shif-calculator`
 - **Housing Levy Calculator** - `http://localhost:3000/housing-levy-calculator`
@@ -91,22 +91,26 @@ Calculate net pay for multiple employees in a single request.
 
 **Request Body:**
 
+Include a service code for every request
+
+##### Valid Service Codes
+
+**NSSF**
+-serviceCode: "NSSF"
+
+**SHIF**
+-serviceCode: "SHIF"
+
+**HOUSING LEVY**
+-serviceCode: "HOUSINGLEVY"
+
+**NET PAY**
+-serviceCode: "NETPAY"
+
 ```json
 {
-  "employees": [
-    {
-      "employeePin": "A001234567X",
-      "period": "2026-06",
-      "basicPay": 35000.0,
-      "allowances": 0.0
-    },
-    {
-      "employeePin": "A001234568X",
-      "period": "2026-06",
-      "basicPay": 50000.0,
-      "allowances": 5000.0
-    }
-  ]
+  "serviceCode": "NETPAY",
+  "grossPay": 35000.0
 }
 ```
 
@@ -115,83 +119,26 @@ Calculate net pay for multiple employees in a single request.
 ```json
 {
   "status": "success",
-  "data": [
-    {
-      "employeePin": "A001234567X",
-      "period": "2026-06",
-      "earnings": {
-        "basicPay": 35000.0,
-        "allowances": 0.0,
-        "grossPay": 35000.0
-      },
-      "preTaxDeductions": {
-        "nssf": 2100.0,
-        "shif": 962.5,
-        "housingLevy": 525.0,
-        "totalPreTax": 3587.5
-      },
-      "taxComputation": {
-        "taxableIncome": 31412.5,
-        "grossIncomeTax": 4253.0,
-        "personalRelief": 2400.0,
-        "payeOwed": 1853.0
-      },
-      "postTaxDeductions": {
-        "helb": 0.0,
-        "saccoShares": 0.0,
-        "otherLoans": 0.0,
-        "totalPostTax": 0.0
-      },
-      "totals": {
-        "statutoryDeductions": 5440.5,
-        "grandTotalDeductions": 5440.5
-      },
-      "disbursement": {
-        "netPay": 29559.5,
-        "currency": "KES"
-      }
-    }
-  ]
+  "data": {
+    "serviceCode": "NETPAY",
+    "earnings": {
+      "grossPay": 35000
+    },
+    "preTaxDeductions": {
+      "nssf": 2100,
+      "shif": 962.5,
+      "housingLevy": 525,
+      "totalPreTax": 3587.5
+    },
+    "payeDeductions": {
+      "taxableIncome": 31412.5,
+      "incomeTax": "4253.13",
+      "personalRelief": 2400,
+      "payeTotal": 1853.13
+    },
+    "netPay": 29559.37
+  }
 }
-```
-
-## Project Structure
-
-```
-├── index.js                    # Main application entry point
-├── package.json               # Project dependencies
-├── meta.json                  # Example output format
-├── public/                    # Static assets
-│   └── css/
-│       └── style.css         # Styling
-├── src/
-│   ├── api/                  # REST API endpoints
-│   │   ├── config/           # Tax rates and constants
-│   │   │   ├── housing-levy-rates.json
-│   │   │   ├── nssf-rates.json
-│   │   │   ├── paye-rates.json
-│   │   │   └── shif-rates.json
-│   │   ├── controllers/      # API request handlers
-│   │   ├── middlewares/      # Validation middleware
-│   │   ├── modules/          # Tax calculation modules
-│   │   │   ├── housingLevy/
-│   │   │   ├── NSSF/
-│   │   │   ├── PAYE/
-│   │   │   └── SHIF/
-│   │   ├── routes/           # API routes
-│   │   ├── services/         # Business logic
-│   │   └── utils/            # Utilities (error handling)
-│   └── app/                  # Web UI
-│       ├── controllers/      # UI request handlers
-│       └── routes/           # Web routes
-└── views/                    # EJS templates
-    ├── home/
-    ├── gross/
-    ├── nssf/
-    ├── shif/
-    ├── housing-levy/
-    ├── docs/
-    └── shared/
 ```
 
 ## Tax Rates Configuration
