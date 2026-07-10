@@ -152,6 +152,45 @@ button:hover {
   color: #111827;
 }
 
+.footer {
+  margin-top: 60px;
+  background: #111827;
+  color: #d1d5db;
+  padding: 40px 20px;
+}
+
+.footer-content {
+  max-width: 1100px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.footer-links {
+  margin: 18px 0;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.footer-links a {
+  color: #60a5fa;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer-links a:hover {
+  color: #93c5fd;
+}
+
+.disclaimer {
+  max-width: 700px;
+  margin: 20px auto 0;
+  font-size: 0.9rem;
+  color: #9ca3af;
+  line-height: 1.6;
+}
+
 /* Responsive */
 
 @media (max-width: 768px) {
