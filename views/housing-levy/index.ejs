@@ -1,13 +1,90 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Housing Levy</title>
+    <title>Housing Levy Calculator</title>
     <link rel="stylesheet" href="/css/style.css" />
   </head>
 
   <body>
-    <h2>Housing Levy</h2>
+    <%- include('../shared/header') %>
+
+    <main>
+      <section>
+        <h1>Housing Levy Calculator</h1>
+
+        <p>
+          As an employee, your employer will deduct this tax and remit it to KRA
+          on your behalf through KRA Online Portal. Housing Levy is a mandatory
+          statutory deduction in Kenya introduced to support the Affordable
+          Housing Programme. It is charged as a fixed percentage of an
+          employee’s gross income, with a matching employer contribution, making
+          it a shared responsibility between employer and employee. The levy is
+          deducted monthly and remitted to the government to fund the
+          development of affordable housing units and related social
+          infrastructure. Contributors may benefit through access to affordable
+          home ownership or rental options, and in some cases, refunds or
+          credits if they do not ultimately receive a housing allocation.
+        </p>
+
+        <h2>Housing Levy Rates Effective July 2023</h2>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Employee Contribution</th>
+              <th>Employer Contribution</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <td>1.5% of Gross Pay</td>
+              <td>1.5% of Gross Pay</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <form id="paye-form">
+          <h2>Calculate PAYE</h2>
+
+          <div>
+            <label for="gross-pay">Gross Monthly Salary (KES)</label>
+            <input
+              id="gross-pay"
+              name="grossPay"
+              type="number"
+              placeholder="0.00"
+              min="0"
+              step="0.01"
+              required
+            />
+          </div>
+
+          <button type="submit">Calculate</button>
+        </form>
+      </section>
+
+      <section id="results" hidden>
+        <h2>Results</h2>
+
+        <table>
+          <tbody>
+            <tr>
+              <td>Gross Salary</td>
+              <td id="gross-salary">KES 0.00</td>
+            </tr>
+
+            <tr>
+              <td>Housing Levy</td>
+              <td id="housing-levy">KES 0.00</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </main>
   </body>
 </html>
