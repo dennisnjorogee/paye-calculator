@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -8,6 +8,85 @@
   </head>
 
   <body>
-    <h2>SHIF Calculator</h2>
+    <%- include('../shared/header') %>
+
+    <main>
+      <section>
+        <h1>SHIF Calculator</h1>
+
+        <p>
+          As an employee, your employer will deduct this SHIF and remit it to
+          Social Health Authority (SHA) on your behalf through KRA Online
+          Portal. Social Health Insurance Fund (SHIF) is Kenya’s national health
+          insurance scheme that replaced NHIF as part of the Universal Health
+          Coverage (UHC) reforms. It is mandatory for all Kenyan residents,
+          whether formally employed, self-employed, or unemployed. Contributions
+          are income-based, calculated as a fixed percentage of gross income,
+          ensuring higher earners contribute more while expanding coverage for
+          lower-income groups through government support.
+        </p>
+
+        <h2>SHIF Rates</h2>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Gross Monthly Income (KES)</th>
+              <th>SHIF Contribution (KES)</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <td>KES 0 - KES 5,999</td>
+              <td>KES 300</td>
+            </tr>
+            <tr>
+              <td>KES 6,000 and above</td>
+              <td>2.75% of gross salary</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <form id="paye-form">
+          <h2>Calculate SHIF</h2>
+
+          <div>
+            <label for="gross-pay">Gross Monthly Salary (KES)</label>
+            <input
+              id="gross-pay"
+              name="grossPay"
+              type="number"
+              placeholder="0.00"
+              min="0"
+              step="0.01"
+              required
+            />
+          </div>
+
+          <button type="submit">Calculate</button>
+        </form>
+      </section>
+
+      <section id="results" hidden>
+        <h2>Results</h2>
+
+        <table>
+          <tbody>
+            <tr>
+              <td>Gross Salary</td>
+              <td id="gross-salary">KES 0.00</td>
+            </tr>
+
+            <tr>
+              <td>SHIF</td>
+              <td id="shif">KES 0.00</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </main>
   </body>
 </html>
