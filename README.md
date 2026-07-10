@@ -87,7 +87,16 @@ Access individual calculators via the web UI:
 
 **POST** `/api/v1/bulk-calculate`
 
-Calculate net pay for multiple employees in a single request.
+Calculate tax calculations from a single endpoint / request.
+
+##### Supported Calculations
+
+The following calculations are supported. Each calculation is represented by a given service code.
+
+-NSSF
+-SHIF
+-HOUSING LEVY
+-NETPAY
 
 Include a service code for every request
 
