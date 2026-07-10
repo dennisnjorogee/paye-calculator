@@ -1,4 +1,4 @@
-import nssfRates from "../config/nssf-rates.json" with { type: "json" };
+import nssfRates from "../../config/nssf-rates.json" with { type: "json" };
 
 export const calculateNSSF = (grossPay) => {
   //constants

@@ -1,4 +1,4 @@
-import payeRates from "../config/paye-rates.json" with { type: "json" };
+import payeRates from "../../config/paye-rates.json" with { type: "json" };
 
 export const calculatePAYE = (taxableIncome) => {
   //constants

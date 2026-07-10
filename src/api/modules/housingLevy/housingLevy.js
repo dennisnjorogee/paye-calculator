@@ -1,4 +1,4 @@
-import housingLevyRates from "../config/housing-levy-rates.json" with { type: "json" };
+import housingLevyRates from "../../config/housing-levy-rates.json" with { type: "json" };
 
 export const calculateHousingLevy = (grossPay) => {
   // constants

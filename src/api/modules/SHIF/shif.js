@@ -1,4 +1,4 @@
-import shifRates from "../config/shif-rates.json" with { type: "json" };
+import shifRates from "../../config/shif-rates.json" with { type: "json" };
 
 export const calculateSHIF = (grossPay) => {
   // constants
