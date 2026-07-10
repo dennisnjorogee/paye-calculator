@@ -165,12 +165,6 @@ These rates are based on the latest KRA guidelines and can be updated as needed.
 - Applied to (Gross Pay - Pre-Tax Deductions)
 - Includes personal relief of KES 2,400
 
-### Post-Tax Deductions
-
-- HELB loans
-- SACCO shares
-- Other loan deductions
-
 ## Error Handling
 
 The API validates all requests and returns structured error responses:
@@ -185,9 +179,6 @@ The API validates all requests and returns structured error responses:
 Common validation errors:
 
 - Missing required fields
-- Invalid employee PIN format
-- Negative salary amounts
-- Invalid date format
 
 ## Development
 
@@ -206,22 +197,6 @@ No build step required. The application uses ES Modules and runs directly with N
 ## License
 
 MIT - See LICENSE file for details
-
-## Author
-
-**Dennis Njoroge**  
-Email: dennesmwangi55@gmail.com  
-GitHub: [dennesnjoroge](https://github.com/dennesnjoroge)
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-## Links
-
-- **Repository**: https://github.com/dennesnjoroge/paye-calculator
-- **Issues**: https://github.com/dennesnjoroge/paye-calculator/issues
-- **Homepage**: https://github.com/dennesnjoroge/paye-calculator#readme
 
 ---
 
