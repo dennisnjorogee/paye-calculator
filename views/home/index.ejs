@@ -8,20 +8,7 @@
   </head>
 
   <body>
-    <header>
-      <nav>
-        <ul>
-          <li><a href="/nssf-calculator">NSSF Calculator</a></li>
-          <li><a href="/shif-calculator">SHIF Calculator</a></li>
-          <li>
-            <a href="/housing-levy-calculator">Housing Levy Calculator</a>
-          </li>
-          <li>
-            <a href="/docs">API Documentation</a>
-          </li>
-        </ul>
-      </nav>
-    </header>
+    <%- include('../shared/header') %>
 
     <main>
       <section>
@@ -127,5 +114,9 @@
         </table>
       </section>
     </main>
+
+    <%- include('../shared/footer') %>
+
+    <script src="/js/paye.js"></script>
   </body>
 </html>
