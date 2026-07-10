@@ -1,13 +1,131 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PAYE Calculator</title>
+    <title>Kenya PAYE Calculator</title>
     <link rel="stylesheet" href="/css/style.css" />
   </head>
 
   <body>
-    <h2>Home</h2>
+    <header>
+      <nav>
+        <ul>
+          <li><a href="/nssf-calculator">NSSF Calculator</a></li>
+          <li><a href="/shif-calculator">SHIF Calculator</a></li>
+          <li>
+            <a href="/housing-levy-calculator">Housing Levy Calculator</a>
+          </li>
+          <li>
+            <a href="/docs">API Documentation</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section>
+        <h1>PAYE Calculator</h1>
+
+        <p>
+          A PAYE (Pay As You Earn) Calculator helps employees and employers in
+          Kenya determine the income tax payable based on the Kenya Revenue
+          Authority (KRA) tax bands. It also considers statutory deductions such
+          as NSSF and SHIF to estimate net salary.
+        </p>
+
+        <h2>PAYE Tax Bands (Effective 1 July 2023)</h2>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Monthly Taxable Income (KES)</th>
+              <th>Tax Rate</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <td>0 – 24,000</td>
+              <td>10%</td>
+            </tr>
+            <tr>
+              <td>Next 8,333</td>
+              <td>25%</td>
+            </tr>
+            <tr>
+              <td>Next 467,667</td>
+              <td>30%</td>
+            </tr>
+            <tr>
+              <td>Next 300,000</td>
+              <td>32.5%</td>
+            </tr>
+            <tr>
+              <td>Above 800,000</td>
+              <td>35%</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <form id="paye-form">
+          <h2>Calculate PAYE</h2>
+
+          <div>
+            <label for="gross-pay">Gross Monthly Salary (KES)</label>
+            <input
+              id="gross-pay"
+              name="grossPay"
+              type="number"
+              placeholder="0.00"
+              min="0"
+              step="0.01"
+              required
+            />
+          </div>
+
+          <button type="submit">Calculate</button>
+        </form>
+      </section>
+
+      <section id="results" hidden>
+        <h2>Results</h2>
+
+        <table>
+          <tbody>
+            <tr>
+              <td>Gross Salary</td>
+              <td id="gross-salary">KES 0.00</td>
+            </tr>
+            <tr>
+              <td>NSSF</td>
+              <td id="nssf">KES 0.00</td>
+            </tr>
+            <tr>
+              <td>SHIF</td>
+              <td id="shif">KES 0.00</td>
+            </tr>
+            <tr>
+              <td>Housing Levy</td>
+              <td id="housing-levy">KES 0.00</td>
+            </tr>
+            <tr>
+              <td>Taxable Income</td>
+              <td id="taxable-income">KES 0.00</td>
+            </tr>
+            <tr>
+              <td>PAYE</td>
+              <td id="paye">KES 0.00</td>
+            </tr>
+            <tr>
+              <td><strong>Net Salary</strong></td>
+              <td id="net-salary"><strong>KES 0.00</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </main>
   </body>
 </html>

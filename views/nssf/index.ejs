@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -8,6 +8,95 @@
   </head>
 
   <body>
-    <h2>NSSF Calculator</h2>
+    <header>
+      <nav>
+        <ul>
+          <li><a href="/nssf-calculator">NSSF Calculator</a></li>
+          <li><a href="/shif-calculator">SHIF Calculator</a></li>
+          <li>
+            <a href="/housing-levy-calculator">Housing Levy Calculator</a>
+          </li>
+          <li>
+            <a href="/docs">API Documentation</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section>
+        <h1>NSSF Calculator</h1>
+
+        <p>
+          National Social Security Fund (NSSF) Calculator helps employees and
+          employers determine their monthly pension contributions under the NSSF
+          Act, 2013 (Tier I & II). The fund promotes long-term savings for
+          retirement and is mandatory for all employed persons in Kenya.
+        </p>
+
+        <h2>NSSF Contribution Rates - Effective February 2026</h2>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Tier</th>
+              <th>Monthly Pensionable Income (KES)</th>
+              <th>Contribution (6% Employee + 6% Employer)</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <td>tier 1</td>
+              <td>Up to 9,000</td>
+              <td>6% of income (max KES 540 per side)</td>
+            </tr>
+            <tr>
+              <td>tier 2</td>
+              <td>9,001 - 108,000</td>
+              <td>6% of income (max KES 5,940 per side)</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <form id="paye-form">
+          <h2>NSSF Calculator</h2>
+
+          <div>
+            <label for="gross-pay">Gross Monthly Salary (KES)</label>
+            <input
+              id="gross-pay"
+              name="grossPay"
+              type="number"
+              placeholder="0.00"
+              min="0"
+              step="0.01"
+              required
+            />
+          </div>
+
+          <button type="submit">Calculate</button>
+        </form>
+      </section>
+
+      <section id="results" hidden>
+        <h2>Results</h2>
+
+        <table>
+          <tbody>
+            <tr>
+              <td>Gross Salary</td>
+              <td id="gross-salary">KES 0.00</td>
+            </tr>
+            <tr>
+              <td>NSSF</td>
+              <td id="nssf">KES 0.00</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </main>
   </body>
 </html>
