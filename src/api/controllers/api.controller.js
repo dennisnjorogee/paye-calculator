@@ -1,14 +1,15 @@
 import apiService from "../services/api.service.js";
 
-const calculateNetPay = (req, res) => {
+const bulkCalculate = (req, res) => {
   const grossPay = req.grossPay;
+  const serviceCode = req.serviceCode;
 
-  const netPay = apiService.calculateNetPay(grossPay);
+  const data = apiService.bulkCalculate(grossPay, serviceCode);
 
   res.status(200).json({
     status: "success",
-    payload: netPay,
+    data,
   });
 };
 
-export default { calculateNetPay };
+export default { bulkCalculate };

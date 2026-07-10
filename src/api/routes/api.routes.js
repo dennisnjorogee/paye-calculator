@@ -4,9 +4,9 @@ import validationMiddleware from "../middlewares/validation.middleware.js";
 const router = Router();
 
 router.post(
-  "/net-pay",
-  validationMiddleware.netPay,
-  apiController.calculateNetPay,
+  "/bulk-calculate",
+  validationMiddleware.bulkCalculate,
+  apiController.bulkCalculate,
 );
 
 export default router;
