@@ -3,6 +3,7 @@ import "dotenv/config";
 import express from "express";
 import cors from "cors";
 import path from "path";
+import helmet from "helmet";
 import { fileURLToPath } from "url";
 
 // routes
@@ -15,6 +16,7 @@ const __dirname = path.dirname(__filename);
 
 // app, port
 const app = express();
+app.use(helmet());
 const port = process.env.PORT || 3000;
 
 // CORS config
