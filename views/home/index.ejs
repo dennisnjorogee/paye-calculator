@@ -2,12 +2,16 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta
+      name="description"
+      content="Free Kenya PAYE Calculator. Calculate PAYE, NSSF, SHIF, Housing Levy and Net Salary using the latest Kenyan tax rates."
+    />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Kenya PAYE Calculator</title>
     <link rel="stylesheet" href="/css/style.css" />
   </head>
 
-  <body>
+  <body data-api-url="<%= API_URL %>">
     <%- include('../shared/header') %>
 
     <main>
@@ -21,7 +25,7 @@
           as NSSF and SHIF to estimate net salary.
         </p>
 
-        <h2>PAYE Tax Bands (Effective 1 July 2023)</h2>
+        <h2>PAYE Tax Bands (Current Kenya Rates)</h2>
 
         <table>
           <thead>
@@ -57,7 +61,7 @@
       </section>
 
       <section>
-        <form id="paye-form">
+        <form id="paye-form" autocomplete="off">
           <h2>Calculate PAYE</h2>
 
           <div>
@@ -77,7 +81,7 @@
         </form>
       </section>
 
-      <section id="results" hidden>
+      <section id="results" hidden aria-live="polite">
         <h2>Results</h2>
 
         <table>
@@ -87,7 +91,7 @@
               <td id="gross-salary">KES 0.00</td>
             </tr>
             <tr>
-              <td>NSSF</td>
+              <td>NSSF (Tier I & II)</td>
               <td id="nssf">KES 0.00</td>
             </tr>
             <tr>
@@ -107,6 +111,10 @@
               <td id="paye">KES 0.00</td>
             </tr>
             <tr>
+              <td>Total Deductions</td>
+              <td id="deductions">KES 0.00</td>
+            </tr>
+            <tr>
               <td><strong>Net Salary</strong></td>
               <td id="net-salary"><strong>KES 0.00</strong></td>
             </tr>
@@ -117,6 +125,6 @@
 
     <%- include('../shared/footer') %>
 
-    <script src="/js/paye.js"></script>
+    <script src="/js/paye.js" defer></script>
   </body>
 </html>
