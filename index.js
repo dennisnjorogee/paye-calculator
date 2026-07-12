@@ -41,6 +41,11 @@ app.set("views", path.join(__dirname, "views"));
 app.use("/api/v1", apiRoutes);
 app.use("/", appRoutes);
 
+// route not found fallback
+app.use((req, res) => {
+  res.sendStatus(404);
+});
+
 // global error handler
 app.use((error, req, res, next) => {
   if (error instanceof AppError) {
