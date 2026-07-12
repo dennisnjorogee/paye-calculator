@@ -32,7 +32,7 @@ const bulkCalculate = (grossPay, serviceCode) => {
     // calculate housing levy
     const housingLevy = calculateHousingLevy(grossPay);
 
-    // total deductions
+    // total pre tax deductions
     const preTaxDeductions = nssf + shif + housingLevy;
 
     // taxable income
@@ -63,6 +63,7 @@ const bulkCalculate = (grossPay, serviceCode) => {
         personalRelief,
         payeTotal,
       },
+      totalDeductions,
       netPay,
     };
   }
