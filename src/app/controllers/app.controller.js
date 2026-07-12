@@ -1,6 +1,11 @@
 // internal website controllers
 const home = (req, res) => {
-  res.render("home/index");
+  const apiUrl =
+    process.env.NODE_ENV === "production"
+      ? process.env.PROD_SERVER_URL
+      : process.env.DEV_SERVER_URL || "http://localhost:3000";
+
+  res.render("home/index", { API_URL: apiUrl });
 };
 
 const grossPayCalc = (req, res) => {
