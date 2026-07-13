@@ -4,12 +4,8 @@ const apiUrl =
     : process.env.DEV_SERVER_URL || "http://localhost:3000";
 
 // internal website controllers
-const home = (req, res) => {
-  res.render("home/index", { API_URL: apiUrl });
-};
-
-const grossPayCalc = (req, res) => {
-  res.render("gross/index");
+const payeCalc = (req, res) => {
+  res.render("paye/index", { API_URL: apiUrl });
 };
 
 const nssfCalc = (req, res) => {
@@ -17,7 +13,7 @@ const nssfCalc = (req, res) => {
 };
 
 const shifCalc = (req, res) => {
-  res.render("shif/index");
+  res.render("shif/index", { API_URL: apiUrl });
 };
 
 const housingLevyCalc = (req, res) => {
@@ -29,8 +25,7 @@ const docs = (req, res) => {
 };
 
 export default {
-  home,
-  grossPayCalc,
+  payeCalc,
   nssfCalc,
   shifCalc,
   housingLevyCalc,

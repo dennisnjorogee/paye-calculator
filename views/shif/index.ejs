@@ -2,17 +2,32 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+
+    <title>SHIF Calculator Kenya | Calculate SHIF Contributions Online</title>
+
+    <meta
+      name="description"
+      content="Free Kenya SHIF Calculator. Calculate your Social Health Insurance Fund (SHIF) contribution instantly using the latest Kenya SHIF rates. Fast, accurate, and easy to use."
+    />
+
+    <meta
+      name="keywords"
+      content="SHIF Calculator Kenya, Kenya SHIF Calculator, Social Health Insurance Fund Calculator, SHIF contribution calculator, Kenya payroll calculator"
+    />
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SHIF Calculator</title>
+
+    <link rel="canonical" href="https://yourdomain.com/shif-calculator" />
+
     <link rel="stylesheet" href="/css/style.css" />
   </head>
 
-  <body>
+  <body data-api-url="<%= API_URL %>">
     <%- include('../shared/header') %>
 
     <main>
       <section>
-        <h1>SHIF Calculator</h1>
+        <h1>Kenya SHIF Calculator</h1>
 
         <p>
           As an employee, your employer will deduct this SHIF and remit it to
@@ -49,9 +64,9 @@
         </table>
       </section>
 
-      <section>
-        <form id="paye-form">
-          <h2>Calculate SHIF</h2>
+      <section id="shif-form-section">
+        <form id="shif-form" autocomplete="off">
+          <h2>SHIF Calculator</h2>
 
           <div>
             <label for="gross-pay">Gross Monthly Salary (KES)</label>
@@ -66,11 +81,17 @@
             />
           </div>
 
+          <p id="error-message" hidden></p>
+
           <button type="submit">Calculate</button>
         </form>
       </section>
 
-      <section id="results" hidden>
+      <section id="results" hidden aria-live="polite">
+        <div class="results-success">
+          <p id="success-message"></p>
+        </div>
+
         <h2>Results</h2>
 
         <table>
@@ -79,14 +100,19 @@
               <td>Gross Salary</td>
               <td id="gross-salary">KES 0.00</td>
             </tr>
-
             <tr>
-              <td>SHIF</td>
-              <td id="shif">KES 0.00</td>
+              <td><strong>SHIF</strong></td>
+              <td id="shif"><strong>KES 0.00</strong></td>
             </tr>
           </tbody>
         </table>
+
+        <button id="reset-btn">Reset</button>
       </section>
     </main>
+
+    <%- include('../shared/footer') %>
+
+    <script src="/js/shif.js" defer></script>
   </body>
 </html>
