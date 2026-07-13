@@ -4,71 +4,58 @@ import { calculateHousingLevy } from "../modules/housingLevy/housingLevy.js";
 import { calculatePAYE } from "../modules/PAYE/paye.js";
 import AppError from "../utils/error.js";
 
-const bulkCalculate = (grossPay, serviceCode) => {
-  // nssf only
-  if (serviceCode === "NSSF") {
-    const nssf = calculateNSSF(grossPay);
-    return { serviceCode, grossPay, nssf };
-  }
+const calculator = (grossPay, serviceCode) => {
+  switch (serviceCode) {
+    case "NETPAY": {
+      const nssf = calculateNSSF(grossPay);
+      const shif = calculateSHIF(grossPay);
+      const housingLevy = calculateHousingLevy(grossPay);
 
-  // shif only
-  if (serviceCode === "SHIF") {
-    const shif = calculateSHIF(grossPay);
-    return { serviceCode, grossPay, shif };
-  }
+      const preTaxDeductions = nssf + shif + housingLevy;
+      const taxableIncome = grossPay - preTaxDeductions;
 
-  // housing levy only
-  if (serviceCode === "HOUSINGLEVY") {
-    const housingLevy = calculateHousingLevy(grossPay);
-    return { serviceCode, grossPay, housingLevy };
-  }
+      const { payeTotal, incomeTax, personalRelief } =
+        calculatePAYE(taxableIncome);
+      const totalDeductions = preTaxDeductions + payeTotal;
+      const netPay = taxableIncome - payeTotal;
 
-  // net pay
-  if (serviceCode === "NETPAY") {
-    // calculate nssf
-    const nssf = calculateNSSF(grossPay);
-    // calculate shif
-    const shif = calculateSHIF(grossPay);
-    // calculate housing levy
-    const housingLevy = calculateHousingLevy(grossPay);
+      return {
+        serviceCode,
+        earnings: {
+          grossPay,
+        },
+        preTaxDeductions: {
+          nssf,
+          shif,
+          housingLevy,
+          totalPreTaxDeductions: preTaxDeductions,
+        },
+        payeDeductions: {
+          taxableIncome,
+          incomeTax,
+          personalRelief,
+          payeTotal,
+        },
+        totalDeductions,
+        netPay,
+      };
+    }
+    case "NSSF":
+      return { serviceCode, grossPay, nssf: calculateNSSF(grossPay) };
 
-    // total pre tax deductions
-    const preTaxDeductions = nssf + shif + housingLevy;
+    case "SHIF":
+      return { serviceCode, grossPay, shif: calculateSHIF(grossPay) };
 
-    // taxable income
-    const taxableIncome = grossPay - preTaxDeductions;
-
-    // paye , income tax, personal relief
-    const { payeTotal, incomeTax, personalRelief } =
-      calculatePAYE(taxableIncome);
-
-    const totalDeductions = preTaxDeductions + payeTotal;
-
-    const netPay = taxableIncome - payeTotal;
-
-    return {
-      serviceCode,
-      earnings: {
+    case "HOUSINGLEVY":
+      return {
+        serviceCode,
         grossPay,
-      },
-      preTaxDeductions: {
-        nssf,
-        shif,
-        housingLevy,
-        totalPreTax: preTaxDeductions,
-      },
-      payeDeductions: {
-        taxableIncome,
-        incomeTax,
-        personalRelief,
-        payeTotal,
-      },
-      totalDeductions,
-      netPay,
-    };
-  }
+        housingLevy: calculateHousingLevy(grossPay),
+      };
 
-  throw new AppError("Invalid Service Code", 400);
+    default:
+      throw new AppError(`Invalid Service Code: ${serviceCode}`, 400);
+  }
 };
 
-export default { bulkCalculate };
+export default { calculator };
