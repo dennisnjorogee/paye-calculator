@@ -111,6 +111,7 @@ document.addEventListener("DOMContentLoaded", () => {
     resetBtn.addEventListener("click", () => {
       if (resultsSection) resultsSection.setAttribute("hidden", "");
       if (payeFormSection) payeFormSection.removeAttribute("hidden");
+      payeForm.reset();
     });
   }
 });
