@@ -95,11 +95,11 @@ h1 {
 
 h2 {
   margin: 25px 0 15px;
-  color: #111827;
+  color: #000000;
 }
 
 p {
-  color: #111827;
+  color: #000000;
   margin-bottom: 20px;
 }
 
@@ -199,7 +199,7 @@ button:hover {
 }
 
 #results strong {
-  color: #111827;
+  color: #000000;
 }
 
 #error-message-container {
