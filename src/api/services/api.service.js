@@ -2,7 +2,8 @@ import { calculateSHIF } from "../modules/SHIF/shif.js";
 import { calculateNSSF } from "../modules/NSSF/nssf.js";
 import { calculateHousingLevy } from "../modules/housingLevy/housingLevy.js";
 import { calculatePAYE } from "../modules/PAYE/paye.js";
-import AppError from "../utils/error.js";
+import { AppError } from "../utils/error.js";
+import resultCodes from "../config/result-codes.js";
 
 const calculator = (grossPay, serviceCode) => {
   switch (serviceCode) {
@@ -21,22 +22,23 @@ const calculator = (grossPay, serviceCode) => {
 
       return {
         serviceCode,
-        earnings: {
-          grossPay,
+        grossPay,
+        deductions: {
+          preTax: {
+            nssf,
+            shif,
+            housingLevy,
+            total: preTaxDeductions,
+          },
+          paye: {
+            taxableIncome,
+            incomeTax,
+            personalRelief,
+            amount: payeTotal,
+          },
+
+          total: totalDeductions,
         },
-        preTaxDeductions: {
-          nssf,
-          shif,
-          housingLevy,
-          totalPreTaxDeductions: preTaxDeductions,
-        },
-        payeDeductions: {
-          taxableIncome,
-          incomeTax,
-          personalRelief,
-          payeTotal,
-        },
-        totalDeductions,
         netPay,
       };
     }
@@ -54,7 +56,13 @@ const calculator = (grossPay, serviceCode) => {
       };
 
     default:
-      throw new AppError(`Invalid Service Code: ${serviceCode}`, 400);
+      throw new AppError(
+        resultCodes.INVALID_SERVICE_CODE.code,
+        resultCodes.INVALID_SERVICE_CODE.statusCode,
+        resultCodes.INVALID_SERVICE_CODE.message,
+        `Invalid service code: ${serviceCode}`,
+        "serviceCode",
+      );
   }
 };
 
