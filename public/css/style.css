@@ -80,6 +80,7 @@ table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 th,
@@ -139,6 +140,20 @@ button:hover {
 }
 
 /* Results */
+
+.results-success {
+  background-color: #2ecc71;
+  font-weight: 600;
+  padding-left: 4px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.results-success p {
+  color: #ffffff;
+  padding: 0;
+  margin: 0;
+}
 
 #results table td:first-child {
   font-weight: 600;
