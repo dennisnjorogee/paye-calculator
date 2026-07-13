@@ -16,9 +16,11 @@ export const calculatePAYE = (taxableIncome) => {
     remainingIncome -= taxableAmount;
   }
 
-  incomeTax = incomeTax.toFixed(2);
+  incomeTax = Number(incomeTax.toFixed(2));
 
-  const payeTotal = Math.max(0, incomeTax - PERSONAL_RELIEF);
-
-  return { incomeTax, personalRelief: PERSONAL_RELIEF, payeTotal };
+  return {
+    incomeTax,
+    personalRelief: PERSONAL_RELIEF,
+    payeTotal: Number(Math.max(0, incomeTax - PERSONAL_RELIEF).toFixed(2)),
+  };
 };
