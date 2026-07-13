@@ -2,17 +2,35 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+
+    <title>Housing Levy Calculator Kenya | Calculate Housing Levy Online</title>
+
+    <meta
+      name="description"
+      content="Free Kenya Housing Levy Calculator. Calculate your Affordable Housing Levy contribution instantly using the latest Kenya Housing Levy rate. Fast, accurate, and easy to use."
+    />
+
+    <meta
+      name="keywords"
+      content="Housing Levy Calculator Kenya, Kenya Housing Levy Calculator, Affordable Housing Levy Calculator, Housing Levy contribution calculator, Kenya payroll calculator"
+    />
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Housing Levy Calculator</title>
+
+    <link
+      rel="canonical"
+      href="https://yourdomain.com/housing-levy-calculator"
+    />
+
     <link rel="stylesheet" href="/css/style.css" />
   </head>
 
-  <body>
+  <body data-api-url="<%= API_URL %>">
     <%- include('../shared/header') %>
 
     <main>
       <section>
-        <h1>Housing Levy Calculator</h1>
+        <h1>Housing Levy Calculator Kenya</h1>
 
         <p>
           As an employee, your employer will deduct this tax and remit it to KRA
@@ -47,9 +65,9 @@
         </table>
       </section>
 
-      <section>
-        <form id="paye-form">
-          <h2>Calculate PAYE</h2>
+      <section id="housing-levy-form-section">
+        <form id="housing-levy-form" autocomplete="off">
+          <h2>Housing Levy Calculator</h2>
 
           <div>
             <label for="gross-pay">Gross Monthly Salary (KES)</label>
@@ -64,11 +82,17 @@
             />
           </div>
 
+          <p id="error-message" hidden></p>
+
           <button type="submit">Calculate</button>
         </form>
       </section>
 
-      <section id="results" hidden>
+      <section id="results" hidden aria-live="polite">
+        <div class="results-success">
+          <p id="success-message"></p>
+        </div>
+
         <h2>Results</h2>
 
         <table>
@@ -77,14 +101,19 @@
               <td>Gross Salary</td>
               <td id="gross-salary">KES 0.00</td>
             </tr>
-
             <tr>
-              <td>Housing Levy</td>
-              <td id="housing-levy">KES 0.00</td>
+              <td><strong>Housing Levy</strong></td>
+              <td id="housing-levy"><strong>KES 0.00</strong></td>
             </tr>
           </tbody>
         </table>
+
+        <button id="reset-btn">Reset</button>
       </section>
     </main>
+
+    <%- include('../shared/footer') %>
+
+    <script src="/js/housingLevy.js" defer></script>
   </body>
 </html>

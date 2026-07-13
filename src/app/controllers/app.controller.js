@@ -17,7 +17,7 @@ const shifCalc = (req, res) => {
 };
 
 const housingLevyCalc = (req, res) => {
-  res.render("housing-levy/index");
+  res.render("housing-levy/index", { API_URL: apiUrl });
 };
 
 const docs = (req, res) => {
