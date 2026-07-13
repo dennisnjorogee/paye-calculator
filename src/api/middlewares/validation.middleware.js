@@ -1,7 +1,7 @@
 import AppError from "../utils/error.js";
 
 // bulk calculate endpoint validation middleware
-const bulkCalculate = (req, res, next) => {
+const calculator = (req, res, next) => {
   if (
     req.body.grossPay === undefined ||
     req.body.grossPay === null ||
@@ -31,4 +31,4 @@ const bulkCalculate = (req, res, next) => {
   next();
 };
 
-export default { bulkCalculate };
+export default { calculator };

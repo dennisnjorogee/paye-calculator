@@ -1,10 +1,10 @@
 import apiService from "../services/api.service.js";
 
-const bulkCalculate = (req, res) => {
+const calculator = (req, res) => {
   const grossPay = req.grossPay;
   const serviceCode = req.serviceCode;
 
-  const data = apiService.bulkCalculate(grossPay, serviceCode);
+  const data = apiService.calculator(grossPay, serviceCode);
 
   res.status(200).json({
     status: "success",
@@ -12,4 +12,4 @@ const bulkCalculate = (req, res) => {
   });
 };
 
-export default { bulkCalculate };
+export default { calculator };

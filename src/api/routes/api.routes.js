@@ -4,9 +4,9 @@ import validationMiddleware from "../middlewares/validation.middleware.js";
 const router = Router();
 
 router.post(
-  "/bulk-calculate",
-  validationMiddleware.bulkCalculate,
-  apiController.bulkCalculate,
+  "/calculator",
+  validationMiddleware.calculator,
+  apiController.calculator,
 );
 
 export default router;
