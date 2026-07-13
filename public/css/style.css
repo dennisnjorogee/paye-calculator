@@ -167,6 +167,14 @@ button:hover {
   color: #111827;
 }
 
+#error-message-container {
+  background-color: red;
+}
+
+#error-message {
+  color: red;
+}
+
 .footer {
   margin-top: 60px;
   background: #111827;
