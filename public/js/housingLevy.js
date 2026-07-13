@@ -48,20 +48,16 @@ document.addEventListener("DOMContentLoaded", () => {
         .then((response) => {
           if (!response.ok) {
             return response.json().then((errorBody) => {
-              throw new Error(
-                errorBody.message || `HTTP error ${response.status}`,
-              );
+              throw new Error(errorBody.message);
             });
           }
-          successNotification = "✓ Results loaded successfully";
           return response.json();
         })
         .then((data) => {
+          successNotification = "✓ " + data.message;
           successMessage.innerHTML = successNotification;
           grossSalaryCell.textContent = formatCurrency(data.data.grossPay);
-          housingLevyCell.textContent = formatCurrency(
-            data.data.housingLevy || 0,
-          );
+          housingLevyCell.textContent = formatCurrency(data.data.housingLevy);
 
           if (housingLevyFormSection)
             housingLevyFormSection.setAttribute("hidden", "");
@@ -70,7 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
         })
         .catch((error) => {
           if (errorMessage) errorMessage.removeAttribute("hidden");
-          errorNotification = error.message || "Something went wrong";
+          errorNotification = error.message;
           console.error("Calculation transmission failed:", error);
           errorMessage.innerHTML = errorNotification;
         });
