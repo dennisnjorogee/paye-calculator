@@ -1,13 +1,290 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+
+    <title>
+      Kenya Payroll REST API Documentation | PAYE, NSSF, SHIF & Housing Levy API
+    </title>
+
+    <meta
+      name="description"
+      content="Documentation for the Kenya Payroll REST API. Calculate PAYE, NSSF, SHIF, Housing Levy, taxable income, and net salary using simple JSON endpoints."
+    />
+
+    <meta
+      name="keywords"
+      content="Kenya Payroll API, Kenya PAYE API, REST API, Payroll REST API, PAYE API, NSSF API, SHIF API, Housing Levy API, Salary Calculator API, Kenya Tax API"
+    />
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Docs</title>
+
+    <link rel="canonical" href="https://yourdomain.com/api" />
+
+    <meta name="robots" content="index, follow" />
+
     <link rel="stylesheet" href="/css/style.css" />
   </head>
 
   <body>
-    <h2>Docs</h2>
+    <%- include('../shared/header') %>
+
+    <main>
+      <h1>Kenya Payroll REST API Documentation</h1>
+
+      <section>
+        <h2>Overview</h2>
+        <p>
+          The Kenya Payroll REST API enables developers to calculate statutory
+          payroll deductions and net salary using the latest Kenyan payroll
+          rules. It provides a simple JSON endpoint for integrating payroll
+          calculations into HR systems, accounting software, ERP platforms,
+          payroll applications, and custom business solutions. The API supports
+          calculations for PAYE (Pay As You Earn), NSSF contributions, SHIF
+          contributions, Housing Levy, taxable income, and net salary. Responses
+          are returned in a consistent JSON format, making the API easy to
+          integrate with web, mobile, and backend applications. Designed with a
+          RESTful architecture, the API uses standard HTTP methods and JSON
+          payloads, allowing you to perform payroll calculations without
+          implementing complex tax logic in your own application. As statutory
+          rates change, the API can be updated so your integrations continue
+          using current calculation rules. Whether you're building a payroll
+          system, employee self-service portal, salary calculator, or financial
+          application, the Kenya Payroll REST API provides a reliable and
+          straightforward way to automate Kenyan payroll calculations.
+        </p>
+      </section>
+
+      <section>
+        <h2>Authentication</h2>
+        <p>
+          The API is currently publicly accessible and does not require
+          authentication.
+        </p>
+        <p>
+          <strong>Note:</strong> Authentication (such as API keys or Bearer
+          tokens) may be introduced in a future release. If this occurs, advance
+          notice and updated documentation will be provided to help existing
+          integrations migrate smoothly.
+        </p>
+      </section>
+
+      <section>
+        <h2>Endpoints</h2>
+        <p>
+          The Kenya Payroll REST API is versioned to ensure backward
+          compatibility as new features, calculation rules, and improvements are
+          introduced.
+        </p>
+
+        <p>
+          The API currently exposes a single endpoint. Different payroll
+          calculations are selected by specifying a
+          <strong>serviceCode</strong> in the request body. This approach
+          provides a consistent interface while allowing multiple payroll
+          services to be accessed through the same endpoint.
+        </p>
+
+        <h3>Base Endpoint</h3>
+        <pre><code>/api/v1/</code></pre>
+
+        <h3>Calculator endpoint</h3>
+        <pre><code>/api/v1/calculator</code></pre>
+
+        <p></p>
+
+        <p>
+          Requests are sent to the base endpoint using the
+          <code>POST</code> method. The required payroll calculation is
+          determined by the <code>serviceCode</code> field in the JSON request
+          body.
+        </p>
+
+        <h3>Available Endpoint Methods</h3>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Method</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>POST</code></td>
+              <td>
+                Calculates payroll deductions based on the supplied
+                <code>serviceCode</code> and request data.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>Available Service Codes</h3>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Service Code</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>NETPAY</code></td>
+              <td>
+                Calculates PAYE, NSSF, SHIF, Housing Levy, taxable income, total
+                statutory deductions, and net salary.
+              </td>
+            </tr>
+
+            <tr>
+              <td><code>NSSF</code></td>
+              <td>
+                Calculates employee and employer NSSF contributions based on the
+                supplied gross salary. <strong>NOTE:</strong> The returned
+                contribution represents the amount payable by each party
+                (employee and employer).
+              </td>
+            </tr>
+
+            <tr>
+              <td><code>SHIF</code></td>
+              <td>
+                Calculates the Social Health Insurance Fund (SHIF) contribution
+                based on the supplied gross salary.
+              </td>
+            </tr>
+
+            <tr>
+              <td><code>HOUSINGLEVY</code></td>
+              <td>
+                Calculates employee and employer Housing Levy contributions
+                based on the supplied gross salary.
+              </td>
+            </tr>
+
+            <tr>
+              <td><code>PAYE</code></td>
+              <td>
+                Calculates PAYE (Pay As You Earn) tax based on the supplied
+                taxable income and applicable tax reliefs.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>
+          All requests must include the following
+          <strong>HTTP header:</strong><br />
+
+          <code>Content-Type: application/json</code>
+        </p>
+
+        <p>
+          Every request must also include a valid
+          <strong>serviceCode</strong> in the JSON request body. Refer to the
+          service code table above for the list of supported values.
+        </p>
+
+        <p>
+          The endpoint accepts a JSON request body and returns a JSON response.
+        </p>
+
+        <p>
+          All successful responses are returned in JSON format with an
+          appropriate HTTP status code.
+        </p>
+
+        <p>
+          The following sections provide request and response examples for each
+          supported
+          <code>serviceCode</code>.
+        </p>
+      </section>
+
+      <section>
+        <h2>Request and Response Examples</h2>
+
+        <h3>PAYE Calculation</h3>
+
+        <h4>Request</h4>
+        <img src="/images/netpay-request.webp" alt="netpay request" />
+
+        <h4>Response</h4>
+        <img src="/images/netpay-response.webp" alt="netpay response" />
+
+        <h3>NSSF Calculation</h3>
+
+        <h4>Request</h4>
+        <img src="/images/nssf-request.webp" alt="nssf request" />
+
+        <h4>Response</h4>
+        <img src="/images/nssf-response.webp" alt="nssf reponse" />
+
+        <h3>SHIF Calculation</h3>
+
+        <h4>Request</h4>
+        <img src="/images/shif-request.webp" alt="shif request" />
+
+        <h4>Response</h4>
+        <img src="/images/shif-response.webp" alt="shif response" />
+
+        <h3>Housing Levy Calculation</h3>
+
+        <h4>Request</h4>
+        <img
+          src="/images/housinglevy-request.webp"
+          alt="housing levy request"
+        />
+
+        <h4>Response</h4>
+        <img
+          src="/images/housinglevy-response.webp"
+          alt="housing levy response"
+        />
+
+        <p>
+          Explore code examples
+          <a href="/code-examples"><strong>here.</strong></a>
+        </p>
+      </section>
+
+      <section>
+        <h2>Error Responses</h2>
+        <h3>Api Result Codes(resultCode)</h3>
+
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam,
+          minima quibusdam. Laborum voluptatem tempora enim quisquam sapiente
+          excepturi magnam labore, laboriosam quae vel repellendus assumenda
+          natus maxime dolorem quas ullam?
+        </p>
+      </section>
+
+      <section>
+        <h2>Rate Limits</h2>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam,
+          minima quibusdam. Laborum voluptatem tempora enim quisquam sapiente
+          excepturi magnam labore, laboriosam quae vel repellendus assumenda
+          natus maxime dolorem quas ullam?
+        </p>
+      </section>
+
+      <section>
+        <h2>Frequently Asked Questions</h2>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam,
+          minima quibusdam. Laborum voluptatem tempora enim quisquam sapiente
+          excepturi magnam labore, laboriosam quae vel repellendus assumenda
+          natus maxime dolorem quas ullam?
+        </p>
+      </section>
+    </main>
+
+    <%- include('../shared/footer') %>
+
+    <script src="/js/script.js" defer></script>
   </body>
 </html>
