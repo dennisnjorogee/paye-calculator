@@ -9,7 +9,7 @@ import { fileURLToPath } from "url";
 // routes
 import apiRoutes from "./src/api/routes/api.routes.js";
 import appRoutes from "./src/app/routes/app.routes.js";
-import AppError from "./src/api/utils/error.js";
+import { AppError, serverError } from "./src/api/utils/error.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -49,11 +49,21 @@ app.use((req, res) => {
 // global error handler
 app.use((error, req, res, next) => {
   if (error instanceof AppError) {
-    res.status(error.statusCode).json({
-      status: "fail",
+    return res.status(error.statusCode).json({
+      status: "error",
+      resultCode: error.resultCode,
       message: error.message,
+      errors: [{ field: error.field, message: error.errorMessage }],
     });
   }
+
+  console.log(error);
+
+  res.status(serverError.statusCode).json({
+    status: "error",
+    resultCode: serverError.resultCode,
+    message: serverError.message,
+  });
 });
 
 // server binding
