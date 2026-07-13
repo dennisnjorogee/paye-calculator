@@ -65,34 +65,32 @@ document.addEventListener("DOMContentLoaded", () => {
               );
             });
           }
-          successNotification = "✓ Results loaded successfully";
           return response.json();
         })
         .then((data) => {
+          successNotification = "✓ " + data.message;
           successMessage.innerHTML = successNotification;
-          grossSalaryCell.textContent = formatCurrency(
-            data.data.earnings.grossPay,
-          );
+          grossSalaryCell.textContent = formatCurrency(data.data.grossPay);
           nssfCell.textContent = formatCurrency(
-            data.data.preTaxDeductions.nssf || 0,
+            data.data.deductions.preTax.nssf,
           );
           shifCell.textContent = formatCurrency(
-            data.data.preTaxDeductions.shif || 0,
+            data.data.deductions.preTax.shif,
           );
           housingLevyCell.textContent = formatCurrency(
-            data.data.preTaxDeductions.housingLevy || 0,
+            data.data.deductions.preTax.housingLevy,
           );
           taxableIncomeCell.textContent = formatCurrency(
-            data.data.payeDeductions.taxableIncome || 0,
+            data.data.deductions.paye.taxableIncome,
           );
           payeCell.textContent = formatCurrency(
-            data.data.payeDeductions.payeTotal || 0,
+            data.data.deductions.paye.amount,
           );
           totalDeductionsCell.textContent = formatCurrency(
-            data.data.totalDeductions || 0,
+            data.data.deductions.total,
           );
 
-          netSalaryCell.innerHTML = `<strong>${formatCurrency(data.data.netPay || 0)}</strong>`;
+          netSalaryCell.innerHTML = `<strong>${formatCurrency(data.data.netPay)}</strong>`;
 
           if (payeFormSection) payeFormSection.setAttribute("hidden", "");
           if (resultsSection) resultsSection.removeAttribute("hidden");
