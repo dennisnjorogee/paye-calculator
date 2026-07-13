@@ -2,17 +2,32 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+
+    <title>NSSF Calculator Kenya | Calculate NSSF Contributions Online</title>
+
+    <meta
+      name="description"
+      content="Free Kenya NSSF Calculator. Calculate your employee and employer NSSF contributions instantly using the latest Kenya NSSF rates. Accurate, fast, and easy to use."
+    />
+
+    <meta
+      name="keywords"
+      content="NSSF Calculator Kenya, Kenya NSSF Calculator, NSSF contribution calculator, employee NSSF, employer NSSF, Kenya payroll calculator"
+    />
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>NSSF Calculator</title>
+
+    <link rel="canonical" href="https://yourdomain.com/nssf-calculator" />
+
     <link rel="stylesheet" href="/css/style.css" />
   </head>
 
-  <body>
+  <body data-api-url="<%= API_URL %>">
     <%- include('../shared/header') %>
 
     <main>
       <section>
-        <h1>NSSF Calculator</h1>
+        <h1>Kenya NSSF Calculator</h1>
 
         <p>
           National Social Security Fund (NSSF) Calculator helps employees and
@@ -47,8 +62,8 @@
         </table>
       </section>
 
-      <section>
-        <form id="paye-form">
+      <section id="nssf-form-section">
+        <form id="nssf-form" autocomplete="off">
           <h2>NSSF Calculator</h2>
 
           <div>
@@ -64,11 +79,17 @@
             />
           </div>
 
+          <p id="error-message" hidden></p>
+
           <button type="submit">Calculate</button>
         </form>
       </section>
 
-      <section id="results" hidden>
+      <section id="results" hidden aria-live="polite">
+        <div class="results-success">
+          <p id="success-message"></p>
+        </div>
+
         <h2>Results</h2>
 
         <table>
@@ -78,12 +99,18 @@
               <td id="gross-salary">KES 0.00</td>
             </tr>
             <tr>
-              <td>NSSF</td>
-              <td id="nssf">KES 0.00</td>
+              <td><strong>NSSF (Tier I & II)</strong></td>
+              <td id="nssf"><strong>KES 0.00</strong></td>
             </tr>
           </tbody>
         </table>
+
+        <button id="reset-btn">Reset</button>
       </section>
     </main>
+
+    <%- include('../shared/footer') %>
+
+    <script src="/js/nssf.js" defer></script>
   </body>
 </html>
